@@ -90,7 +90,25 @@ int16_t SX1262::setOutputPower(int8_t power) {
   RADIOLIB_ASSERT(state);
 
   // set PA config
-  state = SX126x::setPaConfig(0x04, RADIOLIB_SX126X_PA_CONFIG_SX1262);
+  switch (power)
+  {
+  case 14:
+    state = SX126x::setPaConfig(0x02, 0x00, 0x02, 0x01);
+    break;
+  case 17:
+    state = SX126x::setPaConfig(0x02, 0x00, 0x03, 0x01);
+    break;
+  case 20:
+    state = SX126x::setPaConfig(0x03, 0x00, 0x05, 0x01);
+    break;
+  case 22:
+    state = SX126x::setPaConfig(0x04, 0x00, 0x07, 0x01);
+    break;
+
+  default:
+    state = SX126x::setPaConfig(0x02, 0x00, 0x02, 0x01);
+    break;
+  }
   RADIOLIB_ASSERT(state);
 
   // set output power
