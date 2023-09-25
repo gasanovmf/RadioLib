@@ -94,6 +94,9 @@ int16_t SX126x::begin(uint8_t cr, uint8_t syncWord, uint16_t preambleLength, flo
   state = invertIQ(false);
   RADIOLIB_ASSERT(state);
 
+  state = setRxBoostedGainMode(true);
+  RADIOLIB_ASSERT(state);
+
   return(state);
 }
 
